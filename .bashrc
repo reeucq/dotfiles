@@ -94,7 +94,7 @@ alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -119,10 +119,27 @@ fi
 eval "$(starship init bash)"
 
 ### COLOR SCRIPT ###
-colorscript -e crunch
+colorscript -e  random 
 . "$HOME/.cargo/env"
 export PATH="$HOME/.cargo/bin:$PATH"
 source /home/depsy/Downloads/alacritty/extra/completions/alacritty.bash
 
 export LC_ALL=en_IN.UTF-8
 export LANG=en_IN.UTF-8
+
+# aliases
+alias ..="cd && .."
+alias bahadurgarh="cd && cd Deepanshu/Websites/capethemes.com/demo/cityofwp/"
+alias websites="cd && cd Deepanshu/Websites/"
+alias documents="cd && cd Deepanshu/Documents"
+alias learning="cd && cd Deepanshu/Learning"
+alias extra="cd && cd Deepanshu/Extra"
+alias ignou="cd && cd Deepanshu/Ignou"
+alias downloads="cd && cd Downloads"
+alias neofetch='neofetch --ascii ~/dotfiles/ascii/pokemon.txt'
+
+### function from transfer.sh for quickly uploading a file and getting a shareable link
+transfer(){ if [ $# -eq 0 ];then echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then echo "$file: No such file or directory">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;}
+
+### thefuck github alias
+eval "$(thefuck --alias)"
